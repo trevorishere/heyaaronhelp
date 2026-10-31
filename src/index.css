@@ -29,6 +29,10 @@
   --color-navy-dark: #0d2d43;
   --color-ink: #444;
   --color-ink-dark: #333;
+  --color-ink-muted: #7a7a7a;
+  --color-label: #5e5e5e;
+  --color-field: #f7f7f7;
+  --color-field-border: #e3e3e3;
   --color-paper: #fefefe;
   --color-ice-100: #f3f8fc;
   --color-ice-200: #e6eff5;
@@ -39,6 +43,8 @@
 
   --font-serif: 'Recoleta', 'Fraunces', Georgia, serif;
   --font-serif--font-variation-settings: 'SOFT' 100;
+  /* The Recoleta demo font watermarks its "fi" ligature. */
+  --font-serif--font-feature-settings: 'liga' 0;
   --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-sans--font-variation-settings: 'opsz' 14;
 

@@ -13,9 +13,9 @@ npm run preview  # serve the production build
 
 - `src/main.tsx` — entry point (React Router `BrowserRouter`)
 - `src/App.tsx` — route table
-- `src/pages/` — one component per page (`Home.tsx`, `NotFound.tsx`)
+- `src/pages/` — one component per page (`Home`, `About`, `Press`, `Contact`, `NotFound`)
 - `src/components/` — `Layout`, `Header`, `Footer`, `ButtonLink`
-- `src/index.css` — Tailwind import, theme tokens (colors, fonts, breakpoints), `container` utility
+- `src/index.css` — Tailwind import, theme tokens (colors, fonts, breakpoints), `site-container` utility
 - `public/images/` — assets exported from Figma
 
 Breakpoints are custom Tailwind variants: mobile 390–767px (unprefixed), `tablet:` 768px+,
@@ -25,6 +25,18 @@ Breakpoints are custom Tailwind variants: mobile 390–767px (unprefixed), `tabl
 
 This is a single-page app with client-side routing, so the host must rewrite unknown paths to
 `index.html` (e.g. Netlify `_redirects`, Vercel rewrites).
+
+## Contact form
+
+The contact form submits to [Formspree](https://formspree.io), which emails each submission.
+
+1. Create a form in Formspree, sending to Aaron's email address, and copy its endpoint
+   (`https://formspree.io/f/…`).
+2. Copy `.env.example` to `.env` and set `VITE_CONTACT_ENDPOINT` to that endpoint.
+3. Set the same variable in the host's environment settings, then redeploy.
+
+Without it, submitting shows an error. Submissions use the subject "New contact form submission —
+Hey Aaron Help", and replying to the email goes to the person who filled in the form.
 
 ## Fonts
 

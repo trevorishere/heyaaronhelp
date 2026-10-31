@@ -151,7 +151,7 @@ export default function Home() {
           {testimonials.map((t) => (
             <figure
               key={t.name}
-              className="m-0 flex flex-col items-center gap-6 text-left tablet:flex-row tablet:gap-10 tablet:even:flex-row-reverse desktop:min-h-[340px] desktop:gap-16 desktop:pr-[168px] desktop:pl-6 desktop:even:pr-6 desktop:even:pl-[168px]"
+              className="m-0 flex flex-col items-center gap-6 text-center tablet:gap-8 desktop:min-h-[340px] desktop:flex-row desktop:gap-16 desktop:pr-[168px] desktop:pl-6 desktop:text-left desktop:even:flex-row-reverse desktop:even:pr-6 desktop:even:pl-[168px]"
             >
               <div className="relative size-[200px] flex-none overflow-hidden rounded-full tablet:size-[220px] desktop:size-[300px]">
                 <img
@@ -167,13 +167,17 @@ export default function Home() {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-4 tablet:flex-1">
-                <blockquote className="m-0 -indent-[0.45em] text-lg leading-[1.4] font-light text-ink tablet:text-xl desktop:text-2xl">
+              <div className="flex flex-col gap-4 max-w-[540px] desktop:max-w-none desktop:flex-1">
+                <blockquote className="m-0 text-[17px] leading-normal font-medium text-ink tablet:text-lg desktop:-indent-[0.45em] desktop:text-xl">
                   “{t.quote}”
                 </blockquote>
-                <figcaption className="flex flex-col gap-1 leading-[1.4] text-ink">
-                  <span className="text-lg font-bold tablet:text-xl">{t.name}</span>
-                  <span className="text-[15px] tablet:text-base">{t.role}</span>
+                <figcaption className="flex flex-col gap-1 text-ink">
+                  <span className="text-base leading-[1.4] tablet:text-[17px] desktop:text-lg desktop:leading-[1.4]">
+                    {t.name}
+                  </span>
+                  <span className="text-sm leading-[1.4] font-light tablet:text-[15px] desktop:text-base desktop:leading-[1.4]">
+                    {t.role}
+                  </span>
                 </figcaption>
               </div>
             </figure>

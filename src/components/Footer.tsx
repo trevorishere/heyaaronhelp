@@ -9,11 +9,28 @@ const links = [
   { to: '/contact', label: 'Contact' },
 ];
 
-// TODO: replace with Aaron's real profile URLs.
 const social = [
-  { href: '#', label: 'Instagram', src: '/images/icon-instagram.svg', w: 45.5, h: 45.5 },
-  { href: '#', label: 'YouTube', src: '/images/icon-youtube.svg', w: 49, h: 38.5 },
-  { href: '#', label: 'LinkedIn', src: '/images/icon-linkedin.svg', w: 45.5, h: 45.5 },
+  {
+    href: 'https://www.instagram.com/thegrowtogetherco/',
+    label: 'Instagram',
+    src: '/images/icon-instagram.svg',
+    w: 45.5,
+    h: 45.5,
+  },
+  {
+    href: 'https://www.youtube.com/@thegrowtogetherco',
+    label: 'YouTube',
+    src: '/images/icon-youtube.svg',
+    w: 49,
+    h: 38.5,
+  },
+  {
+    href: 'https://www.linkedin.com/in/aaronfseducation/',
+    label: 'LinkedIn',
+    src: '/images/icon-linkedin.svg',
+    w: 45.5,
+    h: 45.5,
+  },
 ];
 
 export default function Footer() {
@@ -29,6 +46,8 @@ export default function Footer() {
             <li key={s.label}>
               <a
                 href={s.href}
+                target="_blank"
+                rel="noreferrer"
                 aria-label={s.label}
                 className="grid size-14 place-items-center opacity-80 transition-opacity hover:opacity-100"
               >
