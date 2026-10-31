@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+/*
+ * Headings use Recoleta (commercial). Drop licensed webfont files into
+ * /public/fonts and they'll be picked up here; until then Fraunces (soft)
+ * is used as the closest free fallback.
+ */
+@font-face {
+  font-family: 'Recoleta';
+  src: local('Recoleta Regular'), local('Recoleta-Regular'),
+    url('/fonts/Recoleta-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /*
+   * Breakpoints
+   *   Mobile:  390–767px  (unprefixed)
+   *   Tablet:  768–1099px (tablet:)
+   *   Desktop: 1100px+    (desktop:)
+   */
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1100px;
+
+  --color-navy: #123c58;
+  --color-navy-dark: #0d2d43;
+  --color-ink: #444;
+  --color-ink-dark: #333;
+  --color-paper: #fefefe;
+  --color-ice-100: #f3f8fc;
+  --color-ice-200: #e6eff5;
+  --color-ice-300: #e1f0fa;
+  --color-ice-400: #d8e8f2;
+  --color-footer: #f0f0f0;
+  --color-footer-muted: #a3a3a3;
+
+  --font-serif: 'Recoleta', 'Fraunces', Georgia, serif;
+  --font-serif--font-variation-settings: 'SOFT' 100;
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans--font-variation-settings: 'opsz' 14;
+
+  --shadow-header: 0 1px 12px rgba(41, 41, 41, 0.12);
+}
+
+/*
+ * Centered content column: 1224px max with responsive side gutters.
+ * (Named to avoid merging with Tailwind's built-in `container`, which adds
+ * per-breakpoint max-widths.)
+ */
+@utility site-container {
+  width: min(1224px, 100% - 48px);
+  margin-inline: auto;
+
+  @variant tablet {
+    width: min(1224px, 100% - 80px);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-3 outline-navy;
+  }
+}

@@ -1,22 +1,30 @@
 # heyaaronhelp
 
-Aaron Steinberg - Personal Coaching. Marketing site built with [Astro](https://astro.build) as static HTML/CSS.
+Aaron Steinberg - Personal Coaching. Marketing site built with React, Tailwind CSS v4 and Vite.
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # outputs to dist/
+npm run dev      # http://localhost:5173
+npm run build    # type-checks, then outputs to dist/
+npm run preview  # serve the production build
 ```
 
 ## Structure
 
-- `src/layouts/Base.astro` — page shell (head, fonts, header, footer)
-- `src/components/Header.astro`, `Footer.astro` — shared nav
-- `src/pages/` — one file per page (`index.astro` = homepage)
-- `src/styles/global.css` — tokens, breakpoints, buttons
+- `src/main.tsx` — entry point (React Router `BrowserRouter`)
+- `src/App.tsx` — route table
+- `src/pages/` — one component per page (`Home.tsx`, `NotFound.tsx`)
+- `src/components/` — `Layout`, `Header`, `Footer`, `ButtonLink`
+- `src/index.css` — Tailwind import, theme tokens (colors, fonts, breakpoints), `container` utility
 - `public/images/` — assets exported from Figma
 
-Breakpoints: mobile 390–767px (base), tablet `min-width: 768px`, desktop `min-width: 1100px`.
+Breakpoints are custom Tailwind variants: mobile 390–767px (unprefixed), `tablet:` 768px+,
+`desktop:` 1100px+. Tailwind's default `sm`/`md`/`lg`/`xl` breakpoints are disabled.
+
+## Deploying
+
+This is a single-page app with client-side routing, so the host must rewrite unknown paths to
+`index.html` (e.g. Netlify `_redirects`, Vercel rewrites).
 
 ## Fonts
 
