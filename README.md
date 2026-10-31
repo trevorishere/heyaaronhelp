@@ -13,8 +13,8 @@ npm run preview  # serve the production build
 
 - `src/main.tsx` — entry point (React Router `BrowserRouter`)
 - `src/App.tsx` — route table
-- `src/pages/` — one component per page (`Home`, `About`, `Press`, `Contact`, `NotFound`)
-- `src/components/` — `Layout`, `Header`, `Footer`, `ButtonLink`
+- `src/pages/` — one component per page (`Home`, `Coaching`, `About`, `Projects`, `Press`, `Contact`, `NotFound`)
+- `src/components/` — `Layout`, `Header`, `Footer`, `ButtonLink`, `CoachingSection`
 - `src/index.css` — Tailwind import, theme tokens (colors, fonts, breakpoints), `site-container` utility
 - `public/images/` — assets exported from Figma
 

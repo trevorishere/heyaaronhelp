@@ -1,20 +1,33 @@
 import type { CSSProperties } from 'react';
 import ButtonLink from '../components/ButtonLink';
+import CoachingSection from '../components/CoachingSection';
 import Layout from '../components/Layout';
+import { display, lede } from '../styles';
 
-// Logo boxes match the Figma frame. `fill` logos are pre-squashed PNGs that
-// stretch back to their natural proportions inside the box.
+// Desktop logo sizes keep each artwork's proportions within the Figma row's
+// 156×36 / 206×30 slots. Multi-part logos place each layer as in Figma
+// (left, top, width, height as % of the logo).
 const press = [
-  { name: 'NPR', src: '/images/logo-npr.png', w: 156, h: 36, fit: 'object-fill' },
-  { name: 'Newsweek', src: '/images/logo-newsweek.png', w: 206, h: 30, fit: 'object-fill' },
-  { name: 'TODAY', src: '/images/logo-today.png', w: 206, h: 30, fit: 'object-cover' },
-  { name: 'HuffPost', src: '/images/logo-huffpost.png', w: 206, h: 30, fit: 'object-cover' },
-  { name: 'Cosmopolitan', src: '/images/logo-cosmopolitan.png', w: 206, h: 30, fit: 'object-cover' },
-];
-
-const specialties = [
-  ['General Well-Being', 'Performance Coaching', 'Leadership & Communication'],
-  ['Relationships', 'Organizational Consulting', 'Executive Coaching'],
+  { name: 'NPR', w: 105, h: 36, opacity: 'opacity-55', layers: [{ src: '/images/press-logo-npr.svg' }] },
+  { name: 'Newsweek', w: 187, h: 30, opacity: 'opacity-50', layers: [{ src: '/images/press-logo-newsweek.png' }] },
+  {
+    name: 'TODAY',
+    w: 194.5,
+    h: 30,
+    opacity: 'opacity-50',
+    layers: [
+      { src: '/images/press-logo-today-rainbow.svg', box: { x: 0, y: 0, w: 30.3, h: 98.26 } },
+      { src: '/images/press-logo-today-wordmark.svg', box: { x: 33.19, y: 11.86, w: 66.81, h: 88.14 } },
+    ],
+  },
+  { name: 'HuffPost', w: 206, h: 24, opacity: 'opacity-50', layers: [{ src: '/images/press-logo-huffpost.svg' }] },
+  {
+    name: 'Cosmopolitan',
+    w: 164.5,
+    h: 30,
+    opacity: 'opacity-50',
+    layers: [{ src: '/images/press-logo-cosmopolitan.svg' }],
+  },
 ];
 
 // `crop` reproduces each photo's placement inside its circular frame in Figma
@@ -45,11 +58,6 @@ const testimonials = [
     crop: { w: 238.88, h: 134.4, x: -0.04, y: 0.02 },
   },
 ];
-
-const display = (mobileSize = 'text-[26px]') =>
-  `font-serif ${mobileSize} leading-[1.25] text-balance text-ink tablet:text-[38px] tablet:leading-[1.2] desktop:text-5xl`;
-const lede =
-  'text-[17px] leading-normal font-light text-balance text-ink tablet:text-xl tablet:leading-[1.4] desktop:text-2xl';
 
 export default function Home() {
   return (
@@ -83,14 +91,28 @@ export default function Home() {
           >
             Featured in
           </h2>
-          <ul className="flex flex-wrap items-center justify-center gap-4 mix-blend-multiply [--s:0.5] tablet:gap-x-10 tablet:gap-y-6 tablet:[--s:0.75] desktop:flex-nowrap desktop:gap-10 desktop:[--s:1]">
+          <ul className="flex flex-wrap items-center justify-center gap-4 mix-blend-multiply [--s:0.5] tablet:gap-x-10 tablet:gap-y-6 tablet:[--s:0.75] desktop:flex-nowrap desktop:gap-12 desktop:[--s:1]">
             {press.map((p) => (
               <li
                 key={p.name}
-                className="h-[calc(var(--h)*var(--s))] w-[calc(var(--w)*var(--s))]"
+                role="img"
+                aria-label={p.name}
+                className={`relative h-[calc(var(--h)*var(--s))] w-[calc(var(--w)*var(--s))] ${p.opacity}`}
                 style={{ '--w': `${p.w}px`, '--h': `${p.h}px` } as CSSProperties}
               >
-                <img src={p.src} alt={p.name} className={`size-full ${p.fit}`} />
+                {p.layers.map((l) => (
+                  <img
+                    key={l.src}
+                    src={l.src}
+                    alt=""
+                    className="absolute inset-0 size-full"
+                    style={
+                      'box' in l
+                        ? { left: `${l.box.x}%`, top: `${l.box.y}%`, width: `${l.box.w}%`, height: `${l.box.h}%` }
+                        : undefined
+                    }
+                  />
+                ))}
               </li>
             ))}
           </ul>
@@ -111,33 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Coaching */}
-      <section className="bg-ice-100 pt-15 pb-10 tablet:pt-24 desktop:py-30">
-        <div className="site-container flex flex-col items-center gap-8 text-center">
-          <div className="flex flex-col gap-2">
-            <h2 className={display()}>Coaching for Individuals and Groups</h2>
-            <p className={`${lede} desktop:leading-[1.2]`}>
-              Live or asynchronous sessions specializing in:
-            </p>
-          </div>
-          <div className="flex flex-col gap-2 text-left tablet:flex-row tablet:justify-center tablet:gap-10 desktop:mb-6 desktop:gap-12">
-            {specialties.map((col) => (
-              <ul key={col[0]} className="flex flex-col gap-2">
-                {col.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-4 text-lg leading-[1.4] font-light text-ink tablet:text-xl desktop:text-2xl"
-                  >
-                    <img src="/images/check.svg" alt="" width={24} height={25} className="flex-none" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
-          <ButtonLink to="/contact">Get Started</ButtonLink>
-        </div>
-      </section>
+      <CoachingSection intro="Live or asynchronous sessions specializing in:" cta="Get Started" />
 
       {/* Testimonials */}
       <section

@@ -63,7 +63,7 @@ export default function Footer() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="text-sm leading-[21px] tracking-[0.1em] text-footer uppercase underline-offset-4 hover:underline tablet:text-base"
+                  className="text-sm leading-[21px] tracking-[0.1em] text-footer uppercase underline-offset-4 hover:underline"
                 >
                   {l.label}
                 </Link>
@@ -73,7 +73,7 @@ export default function Footer() {
         </nav>
 
         <p className="mt-6 text-xs leading-[21px] tracking-[0.3px] text-footer-muted opacity-68 tablet:mt-7 tablet:text-sm">
-          © 2024. Designed by <span className="text-footer">Freshlymade</span>
+          © 2026. Designed by <span className="text-footer">Freshlymade</span>
         </p>
       </div>
     </footer>
