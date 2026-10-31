@@ -1,0 +1,629 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Logo boxes match the Figma frame. `fill` logos are pre-squashed PNGs that
+// stretch back to their natural proportions inside the box.
+const press = [
+  { name: 'NPR', src: '/images/logo-npr.png', w: 156, h: 36, fit: 'fill' },
+  { name: 'Newsweek', src: '/images/logo-newsweek.png', w: 206, h: 30, fit: 'fill' },
+  { name: 'TODAY', src: '/images/logo-today.png', w: 206, h: 30, fit: 'cover' },
+  { name: 'HuffPost', src: '/images/logo-huffpost.png', w: 206, h: 30, fit: 'cover' },
+  { name: 'Cosmopolitan', src: '/images/logo-cosmopolitan.png', w: 206, h: 30, fit: 'cover' },
+];
+
+const specialties = [
+  ['General Well-Being', 'Performance Coaching', 'Leadership & Communication'],
+  ['Relationships', 'Organizational Consulting', 'Executive Coaching'],
+];
+
+// `crop` reproduces each photo's placement inside its circular frame in Figma
+// (percentages of the frame: width, height, left, top).
+const testimonials = [
+  {
+    quote:
+      'Aaron’s ability to get to the core of an issue made our work together incredibly valuable and transformative. I highly recommend him to other executives, or really anyone seeking impactful guidance.',
+    name: 'Michael Garrett',
+    role: 'Founder & CEO, Plunge',
+    src: '/images/testimonial-michael.jpg',
+    crop: { w: 272.16, h: 111.59, x: 4.73, y: -5.96 },
+  },
+  {
+    quote:
+      'Aaron’s ability to convey complex concepts in a lighthearted and accessible way—while still being sincere—is incredibly useful. He is terrific at what he does and his work has helped me tremendously. I highly recommend his services.',
+    name: 'Lane 8',
+    role: 'Musician & Producer',
+    src: '/images/testimonial-lane8.jpg',
+    crop: { w: 317.79, h: 130.29, x: -209.12, y: 0 },
+  },
+  {
+    quote:
+      'Aaron helped me understand myself and how to communicate effectively. He’s helped me progress and grow as a person, and I love soaking up all the good things he has to offer.',
+    name: 'Erika Shelton',
+    role: 'Yoga Teacher and Entrepreneur',
+    src: '/images/testimonial-erika.jpg',
+    crop: { w: 238.88, h: 134.4, x: -0.04, y: 0.02 },
+  },
+];
+---
+
+<Base title="Hey Aaron Help — Coaching for Individuals and Groups" overlayHeader>
+  <section class="hero">
+    <img class="hero-bg" src="/images/hero.jpg" alt="" fetchpriority="high" />
+    <div class="container hero-content">
+      <h1 class="serif">Be the person you’ve <br class="br-wide" />always wanted to be.</h1>
+      <a href="/coaching" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <section class="featured" aria-labelledby="featured-title">
+    <div class="container">
+      <h2 id="featured-title" class="serif featured-title">Featured in</h2>
+      <ul class="logos">
+        {press.map((p) => (
+          <li style={`--w:${p.w}px;--h:${p.h}px`}>
+            <img src={p.src} alt={p.name} class={`fit-${p.fit}`} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="container stack">
+      <div class="mission-text">
+        <h2 class="serif display">“Hey, I’ve gotta get my s**t together and make my life work.”</h2>
+        <p class="lede">
+          Cut through the noise with practical and rigorously tested tools to elevate your
+          self-awareness, performance, leadership, and relationships.
+        </p>
+      </div>
+      <a href="/about" class="btn">About Me</a>
+    </div>
+  </section>
+
+  <section class="coaching">
+    <div class="container stack">
+      <div class="coaching-head">
+        <h2 class="serif display">Coaching for Individuals and Groups</h2>
+        <p class="sub">Live or asynchronous sessions specializing in:</p>
+      </div>
+      <div class="specialties">
+        {specialties.map((col) => (
+          <ul>
+            {col.map((item) => (
+              <li>
+                <img src="/images/check.svg" alt="" width="24" height="25" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+      <a href="/contact" class="btn">Get Started</a>
+    </div>
+  </section>
+
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <h2 id="testimonials-title" class="serif display">Testimonials</h2>
+    <div class="container list">
+      {testimonials.map((t) => (
+        <figure class="testimonial">
+          <div class="photo">
+            <img
+              src={t.src}
+              alt={t.name}
+              loading="lazy"
+              style={`width:${t.crop.w}%;height:${t.crop.h}%;left:${t.crop.x}%;top:${t.crop.y}%`}
+            />
+          </div>
+          <div class="body">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption>
+              <span class="name">{t.name}</span>
+              <span class="role">{t.role}</span>
+            </figcaption>
+          </div>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="start">
+    <div class="container stack">
+      <div class="start-text">
+        <h2 class="serif display">Your Journey Begins Today</h2>
+        <p class="sub">Discover yourself and live life at your fullest.</p>
+      </div>
+      <a href="/contact" class="btn">Get Started</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Shared ---------- */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .display {
+    color: var(--ink);
+    font-size: 26px;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .lede,
+  .sub {
+    text-wrap: balance;
+    color: var(--ink);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    height: 340px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 100%;
+  }
+
+  .hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 34px;
+  }
+
+  .hero h1 {
+    max-width: 220px;
+    color: var(--ink-dark);
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.2px;
+  }
+
+  .br-wide {
+    display: none;
+  }
+
+  /* ---------- Featured in ---------- */
+  .featured {
+    background: var(--sky-400);
+    padding: 40px 0 50px;
+  }
+
+  .featured-title {
+    color: #000;
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .logos {
+    --s: 0.5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 16px;
+    mix-blend-mode: multiply;
+  }
+
+  .logos li {
+    width: calc(var(--w) * var(--s));
+    height: calc(var(--h) * var(--s));
+  }
+
+  .logos img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .fit-fill {
+    object-fit: fill;
+  }
+
+  .fit-cover {
+    object-fit: cover;
+  }
+
+  /* ---------- Mission ---------- */
+  .mission {
+    background: var(--sky-200);
+    padding: 60px 0 80px;
+  }
+
+  .mission .stack {
+    gap: 32px;
+  }
+
+  .mission-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 900px;
+  }
+
+  /* ---------- Coaching ---------- */
+  .coaching {
+    background: var(--sky-100);
+    padding: 60px 0 40px;
+  }
+
+  .coaching .stack {
+    gap: 32px;
+  }
+
+  .coaching-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .specialties {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .specialties ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .specialties li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--ink);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .specialties img {
+    flex: none;
+  }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials {
+    background: var(--sky-100);
+    padding: 60px 0 80px;
+    text-align: center;
+  }
+
+  .testimonials .list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-top: 32px;
+  }
+
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .photo {
+    position: relative;
+    flex: none;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .photo img {
+    position: absolute;
+    max-width: none;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  blockquote {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.4;
+    text-indent: -0.45em;
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .role {
+    font-size: 15px;
+  }
+
+  /* ---------- Start ---------- */
+  .start {
+    background: var(--sky-300);
+    padding: 70px 0 80px;
+  }
+
+  .start .stack {
+    gap: 24px;
+  }
+
+  .start-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .start .display {
+    font-size: 28px;
+  }
+
+  /* ========== Tablet 768–1099 ========== */
+  @media (min-width: 768px) {
+    .display,
+    .start .display {
+      font-size: 38px;
+      line-height: 1.2;
+    }
+
+    .lede,
+    .sub {
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .hero {
+      height: 640px;
+    }
+
+    .hero-bg {
+      object-position: 30% 100%;
+    }
+
+    .hero-content {
+      gap: 32px;
+      padding-top: 190px;
+    }
+
+    .hero h1 {
+      max-width: none;
+      color: var(--ink);
+      font-size: 48px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .br-wide {
+      display: inline;
+    }
+
+    .featured {
+      padding: 64px 0 80px;
+    }
+
+    .featured-title {
+      font-size: 16px;
+      line-height: 22.4px;
+    }
+
+    .logos {
+      --s: 0.75;
+      gap: 24px 40px;
+    }
+
+    .mission {
+      padding: 96px 0;
+    }
+
+    .mission .stack {
+      gap: 40px;
+    }
+
+    .coaching {
+      padding: 96px 0 40px;
+    }
+
+    .specialties {
+      flex-direction: row;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .specialties li {
+      font-size: 20px;
+    }
+
+    .testimonials {
+      padding: 56px 0 96px;
+    }
+
+    .testimonials .list {
+      gap: 48px;
+      margin-top: 40px;
+    }
+
+    .testimonial {
+      flex-direction: row;
+      gap: 40px;
+    }
+
+    .testimonial:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .photo {
+      width: 220px;
+      height: 220px;
+    }
+
+    .body {
+      flex: 1;
+    }
+
+    blockquote {
+      font-size: 20px;
+    }
+
+    .name {
+      font-size: 20px;
+    }
+
+    .role {
+      font-size: 16px;
+    }
+
+    .start {
+      padding: 112px 0;
+    }
+
+    .start .stack {
+      gap: 32px;
+    }
+
+    .start-text {
+      gap: 8px;
+    }
+  }
+
+  /* ========== Desktop 1100+ ========== */
+  @media (min-width: 1100px) {
+    .display,
+    .start .display {
+      font-size: 48px;
+    }
+
+    .lede,
+    .sub {
+      font-size: 24px;
+    }
+
+    .coaching-head .sub {
+      line-height: 1.2;
+    }
+
+    .hero {
+      height: 946px;
+    }
+
+    .hero-bg {
+      object-position: 50% 100%;
+    }
+
+    .hero-content {
+      gap: 40px;
+      padding-top: 190px;
+    }
+
+    .hero h1 {
+      font-size: 72px;
+    }
+
+    .featured {
+      padding: 80px 0 100px;
+    }
+
+    .logos {
+      --s: 1;
+      flex-wrap: nowrap;
+      gap: 40px;
+    }
+
+    .mission {
+      padding: 120px 0;
+    }
+
+    .mission .stack {
+      gap: 48px;
+    }
+
+    .coaching {
+      padding: 120px 0;
+    }
+
+    .specialties {
+      gap: 48px;
+    }
+
+    .specialties li {
+      font-size: 24px;
+    }
+
+    .coaching .stack {
+      gap: 32px;
+    }
+
+    .specialties {
+      margin-bottom: 24px;
+    }
+
+    .testimonials {
+      padding: 96px 0;
+    }
+
+    .testimonials .list {
+      gap: 39px;
+      margin-top: 24px;
+    }
+
+    .testimonial {
+      gap: 64px;
+      min-height: 340px;
+      padding: 0 168px 0 24px;
+    }
+
+    .testimonial:nth-child(even) {
+      padding: 0 24px 0 168px;
+    }
+
+    .photo {
+      width: 300px;
+      height: 300px;
+    }
+
+    blockquote {
+      font-size: 24px;
+    }
+
+    .start {
+      padding: 139px 0 140px;
+    }
+
+    .start .stack {
+      gap: 40px;
+    }
+  }
+</style>
