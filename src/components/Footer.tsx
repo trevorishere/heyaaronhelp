@@ -37,8 +37,8 @@ export default function Footer() {
   return (
     <footer className="bg-navy pt-15 pb-[70px] tablet:pt-20 tablet:pb-25">
       <div className="site-container flex flex-col items-center">
-        <Link to="/" aria-label="Home" className="mb-9 opacity-50">
-          <img src="/images/logo-footer.png" alt="" width={60} height={60} className="size-15" />
+        <Link to="/" aria-label="Home" className="mb-9">
+          <img src="/images/logo-footer.svg" alt="" width={64} height={64} className="size-16" />
         </Link>
 
         <ul className="flex gap-7 tablet:gap-12">

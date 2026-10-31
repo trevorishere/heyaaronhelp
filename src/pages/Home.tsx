@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink, { heroButtonClasses } from '../components/ButtonLink';
 import CoachingSection from '../components/CoachingSection';
 import Layout from '../components/Layout';
 import { display, lede } from '../styles';
@@ -63,19 +63,29 @@ export default function Home() {
   return (
     <Layout title="Hey Aaron Help — Coaching for Individuals and Groups" overlayHeader>
       {/* Hero */}
-      <section className="relative h-[340px] overflow-hidden tablet:h-[640px] desktop:h-[946px]">
+      {/* On mobile the hero slides up under the sticky header (h-20) and the
+          copy sits at the bottom of a full-height, face-centred crop. The
+          photo's height and left offset interpolate between the Figma frames
+          at 390px (906px tall, left −728.78px) and 767px (897px, −534.75px). */}
+      <section className="@container relative -mt-20 flex h-[800px] flex-col overflow-hidden tablet:mt-0 tablet:block tablet:h-[704px] desktop:h-[946px]">
         <img
           src="/images/hero.jpg"
           alt=""
           fetchPriority="high"
-          className="absolute inset-0 size-full object-cover object-[50%_100%] tablet:object-[30%_100%] desktop:object-[50%_100%]"
+          className="absolute bottom-0 left-[calc(-728.78px+(100cqw-390px)*0.51467)] h-[calc(906px-(100cqw-390px)*0.02387)] w-auto max-w-none tablet:inset-0 tablet:size-full tablet:max-w-full tablet:object-cover tablet:object-[30%_100%] desktop:object-[50%_100%]"
         />
-        <div className="site-container relative flex flex-col items-start gap-5 pt-[34px] tablet:gap-8 tablet:pt-[190px] desktop:gap-10">
-          <h1 className="max-w-[220px] font-serif text-[32px] leading-none tracking-[-0.2px] text-ink-dark tablet:max-w-none tablet:text-5xl tablet:leading-[1.1] tablet:tracking-normal tablet:text-ink desktop:text-7xl">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-b from-transparent from-50% to-black/50 to-[72.125%] mix-blend-multiply tablet:hidden"
+        />
+        <div className="relative flex flex-1 flex-col items-center justify-end gap-8 px-8 pb-16 text-center tablet:site-container tablet:block tablet:flex-none tablet:px-0 tablet:pt-[142px] tablet:pb-0 tablet:pl-12 tablet:text-left desktop:pt-[190px]">
+          <h1 className="max-w-[539px] font-serif text-5xl leading-none text-balance text-white tablet:mb-8 tablet:max-w-none tablet:leading-[1.1] tablet:whitespace-nowrap tablet:text-ink desktop:mb-10 desktop:text-7xl">
             Be the person you’ve <br className="hidden tablet:inline" />
             always wanted to be.
           </h1>
-          <ButtonLink to="/coaching">Learn More</ButtonLink>
+          <ButtonLink to="/coaching" className={heroButtonClasses}>
+            Learn More
+          </ButtonLink>
         </div>
       </section>
 
@@ -91,7 +101,7 @@ export default function Home() {
           >
             Featured in
           </h2>
-          <ul className="flex flex-wrap items-center justify-center gap-4 mix-blend-multiply [--s:0.5] tablet:gap-x-10 tablet:gap-y-6 tablet:[--s:0.75] desktop:flex-nowrap desktop:gap-12 desktop:[--s:1]">
+          <ul className="flex flex-wrap items-center justify-center gap-6 mix-blend-multiply [--s:0.5] tablet:gap-x-10 tablet:gap-y-6 tablet:[--s:0.6] desktop:flex-nowrap desktop:gap-16 desktop:[--s:0.8]">
             {press.map((p) => (
               <li
                 key={p.name}
