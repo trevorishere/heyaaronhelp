@@ -8,7 +8,7 @@ interface ButtonLinkProps {
 }
 
 const buttonBase =
-  'inline-flex cursor-pointer items-center justify-center rounded-full text-sm leading-none font-semibold tracking-[0.12em] whitespace-nowrap uppercase transition-colors disabled:cursor-default disabled:opacity-60 tablet:h-14 tablet:px-9 tablet:text-base desktop:h-16 desktop:px-10';
+  'inline-flex cursor-pointer items-center justify-center rounded-full font-fraunces text-sm leading-none whitespace-nowrap transition-colors disabled:cursor-default disabled:opacity-60 tablet:h-14 tablet:px-9 tablet:text-base desktop:h-16 desktop:px-10 desktop:text-xl';
 
 /** Primary navy pill CTA styles, shared with form submit buttons. */
 export const buttonClasses = `${buttonBase} h-12 px-7 bg-navy text-white hover:bg-navy-dark`;

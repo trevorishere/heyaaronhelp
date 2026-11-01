@@ -45,6 +45,9 @@
   --font-serif--font-variation-settings: 'SOFT' 100;
   /* The Recoleta demo font watermarks its "fi" ligature. */
   --font-serif--font-feature-settings: 'liga' 0;
+  /* Fraunces 24pt (the 24pt optical size, unsoftened), used for testimonial quotes and CTAs. */
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-fraunces--font-variation-settings: 'opsz' 24, 'SOFT' 0;
   --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-sans--font-variation-settings: 'opsz' 14;
 
