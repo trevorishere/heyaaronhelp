@@ -1,5 +1,6 @@
 import { buttonClasses } from '../components/ButtonLink';
 import Layout from '../components/Layout';
+import { display } from '../styles';
 
 const projects = [
   {
@@ -27,9 +28,7 @@ export default function Projects() {
     <Layout title="Projects — Hey Aaron Help">
       <section className="pt-10 pb-20 tablet:pt-16 tablet:pb-28 desktop:pt-24 desktop:pb-[136px]">
         <div className="site-container flex flex-col items-center gap-10 tablet:gap-12 desktop:w-[min(1248px,100%-80px)] desktop:gap-16">
-          <h1 className="text-center font-serif text-[32px] leading-[1.2] text-ink-dark tablet:text-[40px] desktop:text-[52.5px] desktop:leading-[64.8px]">
-            Projects
-          </h1>
+          <h1 className={`${display()} text-center`}>Projects</h1>
           <ul className="grid w-full max-w-[600px] gap-8 tablet:gap-10 desktop:max-w-none desktop:grid-cols-2 desktop:gap-16">
             {projects.map((p) => (
               <li

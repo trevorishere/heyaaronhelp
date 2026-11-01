@@ -163,7 +163,7 @@ export default function Header({ overlay = false }: HeaderProps) {
           </ul>
           <Link
             to="/contact"
-            className="inline-flex h-10 items-center rounded-3xl bg-ink-dark px-5 text-sm leading-[1.5] font-semibold tracking-[0.1em] whitespace-nowrap text-paper uppercase hover:bg-[#1f1f1f]"
+            className="inline-flex h-10 items-center rounded-3xl bg-ink-dark px-5 font-fraunces text-sm leading-[1.5] whitespace-nowrap text-paper hover:bg-[#1f1f1f]"
           >
             Get Started
           </Link>
