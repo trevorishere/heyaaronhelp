@@ -1,6 +1,7 @@
 import ButtonLink from '../components/ButtonLink';
 import CoachingSection from '../components/CoachingSection';
 import Layout from '../components/Layout';
+import { display, prose } from '../styles';
 
 // Copy from the current heyaaronhelp.com/coaching page.
 const methodology = [
@@ -51,15 +52,13 @@ export default function Coaching() {
       <article className="pt-10 pb-20 tablet:pt-16 tablet:pb-24 desktop:pt-24 desktop:pb-30">
         <div className="site-container flex max-w-[700px] flex-col items-center gap-10 tablet:gap-12 desktop:gap-16">
           <div className="flex flex-col gap-8 tablet:gap-10 desktop:gap-12">
-            <h1 className="text-center font-serif text-[32px] leading-[1.2] text-ink tablet:text-[40px] desktop:text-5xl">
-              My Methodology
-            </h1>
+            <h1 className={`${display()} text-center`}>My Methodology</h1>
             {methodology.map((s) => (
               <section key={s.heading} className="flex flex-col gap-3 tablet:gap-4">
                 <h2 className="font-serif text-[22px] leading-[1.35] text-balance text-ink-dark tablet:text-2xl desktop:text-[26px]">
                   {s.heading}
                 </h2>
-                <div className="flex flex-col gap-4 text-[17px] leading-[1.6] font-light text-ink tablet:gap-5 tablet:text-lg tablet:leading-[1.7] desktop:text-xl">
+                <div className={prose}>
                   {s.body.map((p) => (
                     <p key={p.slice(0, 24)}>{p}</p>
                   ))}

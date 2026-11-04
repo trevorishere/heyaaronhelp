@@ -1,6 +1,7 @@
 import { useState, type FormEvent, type ReactNode } from 'react';
 import { buttonClasses } from '../components/ButtonLink';
 import Layout from '../components/Layout';
+import { display, lede } from '../styles';
 
 // Formspree form URL, e.g. https://formspree.io/f/abcdwxyz (see README).
 const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
@@ -77,10 +78,8 @@ export default function Contact() {
       <section className="pt-10 pb-20 tablet:pt-16 tablet:pb-28 desktop:pt-24 desktop:pb-[140px]">
         <div className="site-container flex max-w-[700px] flex-col gap-10 tablet:gap-12 desktop:gap-16">
           <div className="flex flex-col gap-2 text-center">
-            <h1 className="font-serif text-[32px] leading-[1.2] text-balance text-ink-dark tablet:text-[40px] desktop:text-5xl">
-              Let’s get started.
-            </h1>
-            <p className="text-[17px] leading-[1.4] font-light text-balance text-ink tablet:text-lg desktop:text-xl">
+            <h1 className={display()}>Let’s get started.</h1>
+            <p className={lede}>
               {status === 'sent'
                 ? 'Thanks for reaching out — I’ll be in touch soon.'
                 : 'Please fill out this form so I can get a sense of how to support you.'}

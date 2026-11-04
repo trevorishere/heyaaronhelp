@@ -1,5 +1,6 @@
 import ButtonLink from '../components/ButtonLink';
 import Layout from '../components/Layout';
+import { display, prose } from '../styles';
 
 const bio = [
   'After majoring in math and a stint as a professional poker player, I had a quarter-life crisis and realized that what I truly love is talking to people about what’s really going on with them. For my friends and family, I was always the person they went to for support and advice, and I relished being able to listen, help them open up, and successfully navigate their issues.',
@@ -22,10 +23,8 @@ export default function About() {
             className="mt-3 size-[140px] rounded-full object-cover object-bottom tablet:size-40 desktop:size-[180px]"
           />
           <div className="flex flex-col gap-4 tablet:gap-6">
-            <h1 className="text-center font-serif text-[32px] leading-[1.2] text-ink tablet:text-[40px] desktop:text-5xl">
-              About Me
-            </h1>
-            <div className="flex flex-col gap-4 text-[17px] leading-[1.6] font-light text-ink tablet:gap-5 tablet:text-lg tablet:leading-[1.7] desktop:text-xl">
+            <h1 className={`${display()} text-center`}>About Me</h1>
+            <div className={prose}>
               {bio.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}

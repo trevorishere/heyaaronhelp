@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import ButtonLink, { heroButtonClasses } from '../components/ButtonLink';
 import CoachingSection from '../components/CoachingSection';
 import Layout from '../components/Layout';
@@ -60,6 +60,24 @@ const testimonials = [
 ];
 
 export default function Home() {
+  // The press logos spread edge to edge; when the last one wraps onto a row of
+  // its own, centre it instead of leaving it at the left.
+  const pressList = useRef<HTMLUListElement>(null);
+  const [loneLast, setLoneLast] = useState(false);
+
+  useLayoutEffect(() => {
+    const ul = pressList.current;
+    if (!ul) return;
+    const check = () => {
+      const last = ul.lastElementChild as HTMLElement | null;
+      const prev = last?.previousElementSibling as HTMLElement | null;
+      setLoneLast(!!last && !!prev && last.offsetTop >= prev.offsetTop + prev.offsetHeight);
+    };
+    const ro = new ResizeObserver(check);
+    ro.observe(ul);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <Layout title="Hey Aaron Help — Coaching for Individuals and Groups" overlayHeader>
       {/* Hero */}
@@ -94,21 +112,28 @@ export default function Home() {
         aria-labelledby="featured-title"
         className="bg-ice-400 pt-10 pb-[50px] tablet:pt-16 tablet:pb-20 desktop:pt-20 desktop:pb-25"
       >
-        <div className="site-container">
+        <div className="site-container @container">
           <h2
             id="featured-title"
             className="mb-4 text-center font-serif text-sm leading-[1.4] text-black tablet:text-base tablet:leading-[22.4px]"
           >
             Featured in
           </h2>
-          <ul className="flex flex-wrap items-center justify-center gap-6 mix-blend-multiply [--s:0.5] tablet:gap-x-10 tablet:gap-y-6 tablet:[--s:0.6] desktop:flex-nowrap desktop:gap-16 desktop:[--s:0.8]">
+          {/* --s is the rendered px per logo px. From tablet up the logos stay on
+              one row and shrink proportionally once the full-size row (logos +
+              side padding + 4 minimum gaps) no longer fits the container. */}
+          <ul
+            ref={pressList}
+            className="flex flex-wrap items-center justify-between gap-6 px-8 mix-blend-multiply [--s:0.5px] tablet:flex-nowrap tablet:gap-10 tablet:px-16 tablet:[--s:min(0.6px,(100cqw-289px)/var(--total))] desktop:gap-16 desktop:px-24 desktop:[--s:min(0.8px,(100cqw-449px)/var(--total))]"
+            style={{ '--total': press.reduce((sum, p) => sum + p.w, 0) } as CSSProperties}
+          >
             {press.map((p) => (
               <li
                 key={p.name}
                 role="img"
                 aria-label={p.name}
-                className={`relative h-[calc(var(--h)*var(--s))] w-[calc(var(--w)*var(--s))] ${p.opacity}`}
-                style={{ '--w': `${p.w}px`, '--h': `${p.h}px` } as CSSProperties}
+                className={`relative h-[calc(var(--h)*var(--s))] w-[calc(var(--w)*var(--s))] ${loneLast ? 'last:mx-auto' : ''} ${p.opacity}`}
+                style={{ '--w': p.w, '--h': p.h } as CSSProperties}
               >
                 {p.layers.map((l) => (
                   <img
@@ -153,7 +178,7 @@ export default function Home() {
         <h2 id="testimonials-title" className={display()}>
           Testimonials
         </h2>
-        <div className="site-container mt-8 flex flex-col gap-14 tablet:mt-10 tablet:gap-12 desktop:mt-6 desktop:gap-[39px]">
+        <div className="site-container mt-8 flex flex-col gap-20 tablet:mt-10 tablet:gap-18 desktop:mt-6 desktop:gap-[63px] desktop:px-6">
           {testimonials.map((t) => (
             <figure
               key={t.name}
@@ -173,11 +198,11 @@ export default function Home() {
                   }}
                 />
               </div>
-              <div className="flex flex-col gap-4 max-w-[540px] desktop:max-w-none desktop:flex-1">
-                <blockquote className="m-0 text-[17px] leading-normal font-medium text-ink tablet:text-lg desktop:-indent-[0.45em] desktop:text-xl">
+              <div className="flex flex-col gap-4 max-w-[480px] tablet:max-w-[540px] desktop:max-w-none desktop:flex-1">
+                <blockquote className="m-0 font-fraunces text-xl leading-[1.4] font-light text-ink tablet:text-[22px] desktop:-indent-[0.45em] desktop:text-2xl">
                   “{t.quote}”
                 </blockquote>
-                <figcaption className="flex flex-col gap-1 text-ink">
+                <figcaption className="flex flex-col text-ink">
                   <span className="text-base leading-[1.4] tablet:text-[17px] desktop:text-lg desktop:leading-[1.4]">
                     {t.name}
                   </span>
@@ -195,7 +220,7 @@ export default function Home() {
       <section className="bg-ice-300 pt-[70px] pb-20 tablet:py-28 desktop:pt-[139px] desktop:pb-[140px]">
         <div className="site-container flex flex-col items-center gap-6 text-center tablet:gap-8 desktop:gap-10">
           <div className="flex flex-col gap-1.5 tablet:gap-2">
-            <h2 className={display('text-[28px]')}>Your Journey Begins Today</h2>
+            <h2 className={display()}>Your Journey Begins Today</h2>
             <p className={lede}>Discover yourself and live life at your fullest.</p>
           </div>
           <ButtonLink to="/contact">Get Started</ButtonLink>
